@@ -23,9 +23,16 @@ const getByIdProductMock = [
 
 const getByIdProductMockNoData = [];
 
+const productNotFoundMock = {
+  type: 'PRODUCT_NOT_FOUND',
+  message: 'Product not found',
+  statusCode: 404
+}
+
 module.exports = {
   getAllProductsMock,
   getAllMockNoData,
   getByIdProductMock,
   getByIdProductMockNoData,
+  productNotFoundMock,
 };

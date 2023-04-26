@@ -1,57 +1,63 @@
 const chai = require("chai");
 const sinon = require("sinon");
 const sinonChai = require("sinon-chai");
-
+//VOLTAR PARA RESLOLVER MELHOR
 chai.use(sinonChai);
 
 const { expect } = chai;
 
 const productsController = require("../../../src/controllers/productsController");
 const productsService = require("../../../src/services/productsService");
+const { getAllProductsMock, getByIdProductMock, productNotFoundMock } = require("../models/mocks/products.mock");
 
-describe("Testa o controller de produtos", () => {
-  describe('Success', () => {
-    afterEach(() => {
-      sinon.restore();
-    });
+describe("Testa o controller", () => {
+  describe('Testa se chama todos os produtos', function () {
+    it('success', async function () {
+      sinon.stub(productsService, 'getAllProducts').resolves(getAllProductsMock);
+      const req = {}
+      const res = {}
 
-    it("Testa se o controller funciona", async () => {
-      sinon.stub(productsService, "getAllProducts").resolves({});
-      const req = {};
-      const res = {
-        status: sinon.stub().returnsThis(),
-        json: sinon.stub().resolves({}),
-      };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
 
       await productsController.getAllProducts(req, res);
 
       expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(getAllProductsMock);
 
-      expect(res.json).to.have.been.calledWith({});
+    })
+  })
 
-      expect(productsService.getAllProducts).to.have.been.calledOnce;
+  describe('Testa a chamada para um id', function () {
+      it('success', async function () {
+      sinon.stub(productsService, 'getOnlyIdProducts').resolves(getByIdProductMock);
+      const req = { params: { id: 1 } }
+      const res = {}
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+
+      await productsController.getOnlyIdProducts(req, res);
+
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(getByIdProductMock);
     });
-  });
-  describe('Fails', () => {
-    afterEach(() => {
-      sinon.restore();
-    });
 
-    it("Testa se o controller falha", async () => {
-      sinon.stub(productsService, "getAllProducts").resolves(null);
-      const req = {};
-      const res = {
-        status: sinon.stub().returnsThis(),
-        json: sinon.stub().resolves({}),
-      };
+    it('com um id inválido', async function () {
+      sinon.stub(productsService, 'getOnlyIdProducts').resolves(productNotFoundMock);
+      const req = { params: { id: xxx } }
+      const res = {}
 
-      await productsController.getAllProducts(req, res);
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
-      expect(res.status).to.have.been.calledWith(422);
 
-      expect(res.json).to.have.been.calledWith({ err: { code: 'invalid_data', message: 'Wrong id format' } });
+      await productsController.getOnlyIdProducts(req, res);
 
-      expect(productsService.getAllProducts).to.have.been.calledOnce;
-    });
-  });
+      expect(res.status).to.have.been.calledWith(404);
+      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+    })
+  })
 });
