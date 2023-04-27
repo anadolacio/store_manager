@@ -8,14 +8,9 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-04-26T18:57:41.123Z",
-    "modified": "2023-04-27T13:35:17.209Z",
+    "modified": "2023-04-27T13:44:31.947Z",
     "headers": [],
     "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"name\": \"ProdutoX\"\n}",
-      "form": []
-    },
     "tests": []
   }
 ]
