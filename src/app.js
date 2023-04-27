@@ -13,6 +13,7 @@ app.get('/', (_request, response) => {
 app.get('/products', productsController.getAllProducts);
 app.get('/products/:id', productsController.getOnlyIdProducts);
 app.post('/products', productsMiddlewares.productNameValidation, productsController.createProduct);
+app.delete('/products/:id', productsController.deleteProduct);
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
