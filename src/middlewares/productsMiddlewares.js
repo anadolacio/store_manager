@@ -1,3 +1,4 @@
+// Validação do nome do produto
 const productNameValidation = (req, res, next) => {
   const { name } = req.body;
 

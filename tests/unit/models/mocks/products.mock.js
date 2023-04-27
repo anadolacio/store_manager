@@ -29,10 +29,17 @@ const productNotFoundMock = {
   statusCode: 404
 }
 
+const newProduct =
+  {
+    id: 4,
+    name: "Colher de Pau",
+  };
+
 module.exports = {
   getAllProductsMock,
   getAllMockNoData,
   getByIdProductMock,
   getByIdProductMockNoData,
   productNotFoundMock,
+  newProduct,
 };
