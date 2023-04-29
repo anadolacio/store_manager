@@ -1,3 +1,4 @@
+const productsService = require('../services/productsService');
 // Validação do nome do produto
 const productNameValidation = (req, res, next) => {
   const { name } = req.body;
@@ -15,6 +16,19 @@ const productNameValidation = (req, res, next) => {
   return next();
 };
 
+const productIdValidation = async (req, res, next) => {
+  const { id } = req.params;
+
+  const result = await productsService.getOnlyIdProducts(id);
+
+  if (!result || result.length === 0) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+
+  return next();
+};
+
 module.exports = {
   productNameValidation,
+  productIdValidation,
 };

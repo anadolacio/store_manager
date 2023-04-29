@@ -20,9 +20,19 @@ const deleteProduct = async (id) => {
   return productDeleted;
 };
 
+// Atualizando produto:
+
+// const updateProduct = async (productName, id) => {
+//   await productsModels.updateProduct(productName, id);
+//   const [{ name }] = await productsModels.getOnlyIdProducts(id);
+
+//   return { id, name };
+// }; 
+
 module.exports = {
   getAllProducts,
   getOnlyIdProducts,
   createProduct,
   deleteProduct,
+  // updateProduct,
 };
