@@ -22,17 +22,17 @@ const deleteProduct = async (id) => {
 
 // Atualizando produto:
 
-// const updateProduct = async (product, id) => {
-//   await productsModels.updateProduct(id, product);
-//   const [{ name }] = await productsModels.getOnlyIdProducts(id);
-
-//   return { id, name };
-// }; 
+const updateProduct = async (product, id) => {
+  await productsModels.updateProduct(id, product);
+  const { name } = await productsModels.getOnlyIdProducts(Number(id));
+  // console.log(name);
+  return { id, name };
+}; 
 
 module.exports = {
   getAllProducts,
   getOnlyIdProducts,
   createProduct,
   deleteProduct,
-  // updateProduct,
+  updateProduct,
 };

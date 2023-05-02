@@ -17,9 +17,9 @@ app.get('/', (_request, response) => {
 app.get('/products', productsController.getAllProducts);
 app.get('/products/:id', productsController.getOnlyIdProducts);
 app.post('/products', productsMiddlewares.productNameValidation, productsController.createProduct);
-// app.put('/products/:id',
-// productsMiddlewares.productNameValidation,
-// productsMiddlewares.productIdValidation, productsController.updateProduct);
+app.put('/products/:id',
+productsMiddlewares.productNameValidation,
+productsMiddlewares.productIdValidation, productsController.updateProduct);
 app.delete('/products/:id', productsController.deleteProduct);
 
 // Sales

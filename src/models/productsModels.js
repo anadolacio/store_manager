@@ -11,6 +11,7 @@ const getAllProducts = async () => {
 const getOnlyIdProducts = async (id) => {
   const [[idProducts]] = await connection
     .execute('SELECT * FROM StoreManager.products WHERE id=?;', [id]);
+  // console.log(idProducts);
   return idProducts;
 };
 
@@ -30,18 +31,20 @@ const deleteProduct = async (id) => {
 };
 
 // Atualizar produto:
-// const updateProduct = async (id, name) => {
-//   const [productUpdated] = await connection.execute(
-//     'UPDATE StoreManager.products SET name = ? WHERE id = ?;',
-//     [name, id],
-//   );
-//   return productUpdated;
-// };
+const updateProduct = async (id, name) => {
+  console.log(id, name);
+  const [productUpdated] = await connection.execute(
+    'UPDATE StoreManager.products SET name = ? WHERE id = ?;',
+    [name, id],
+  );
+  console.log(productUpdated);
+  return productUpdated;
+};
 
 module.exports = {
   getAllProducts,
   getOnlyIdProducts,
   createProduct,
   deleteProduct,
-  // updateProdsuct,
+  updateProduct,
 };
