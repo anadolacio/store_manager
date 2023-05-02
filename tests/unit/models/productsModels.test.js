@@ -34,15 +34,4 @@ describe('Testa a ModelsProducts', function () {
       expect(idProduct).to.be.deep.equal(getByIdProductMock);
     })
   })
-
-  // describe('testa a rota para criação de produto', function () {
-  //   it('success', async function () {
-  //     sinon.stub(connection, 'execute').resolves([newProduct]);
-
-  //     const createdProduct = await productsModels.createProduct({ name: "Colher de Pau" });
-
-  //     expect(createdProduct).to.be.an('array');
-  //     expect(createdProduct).to.be.deep.equal(newProduct);
-  //   })
-  // })
 });

@@ -46,20 +46,5 @@ describe("Testa o controller", () => {
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(getByIdProductMock);
     });
-
-    // it('com um id inválido', async function () {
-    //   sinon.stub(productsService, 'getOnlyIdProducts').resolves(productNotFoundMock);
-    //   const req = { params: { id: 000 } }
-    //   const res = {}
-
-    //   res.status = sinon.stub().returns(res);
-    //   res.json = sinon.stub().returns();
-
-
-    //   await productsController.getOnlyIdProducts(req, res);
-
-    //   expect(res.status).to.have.been.calledWith(404);
-    //   expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
-    // })
   })
 });
