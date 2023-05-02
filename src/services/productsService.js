@@ -22,8 +22,8 @@ const deleteProduct = async (id) => {
 
 // Atualizando produto:
 
-// const updateProduct = async (productName, id) => {
-//   await productsModels.updateProduct(productName, id);
+// const updateProduct = async (product, id) => {
+//   await productsModels.updateProduct(id, product);
 //   const [{ name }] = await productsModels.getOnlyIdProducts(id);
 
 //   return { id, name };

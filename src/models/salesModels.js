@@ -1,3 +1,4 @@
+const camelize = require('camelize');
 const connection = require('./connection');
 
 // Validar e cadastrar vendas:
@@ -20,16 +21,25 @@ const createSales = async (insertId, productId, quantity) => {
 
 // Retornar todos as sales
 const getAllSales = async () => {
-  const [allSales] = await connection
-    .execute('SELECT * FROM StoreManager.sales_products;');
-  return allSales;
+  const [allSales] = await connection.execute(
+      `SELECT sp.sale_id, s.date, sp.product_id, sp.quantity FROM StoreManager.sales_products AS sp 
+      INNER JOIN StoreManager.sales AS s
+      WHERE sp.sale_id = s.id;`,
+  );
+  // console.log(allSales);
+  const result = camelize(allSales);
+  return result;
 };
 
 // Retonar sales com Id
 const getOnlyIdSales = async (id) => {
-  const [[idSales]] = await connection
-    .execute('SELECT * FROM StoreManager.sales WHERE sale_id=?;', [id]);
-  return idSales;
+  const [idSales] = await connection.execute(
+      `SELECT sp.sale_id, s.date, sp.product_id, sp.quantity FROM StoreManager.sales_products AS sp 
+       INNER JOIN StoreManager.sales AS s
+       WHERE sp.sale_id = ? AND s.id = sp.sale_id;`, [id],
+  );
+  const result = camelize(idSales);
+  return result;
 };
 
 module.exports = {
