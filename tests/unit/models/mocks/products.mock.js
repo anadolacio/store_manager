@@ -29,6 +29,10 @@ const productNotFoundMock = {
   statusCode: 404
 }
 
+const productDEleted = {
+  statusCode: 204
+}
+
 const newProduct =
   {
     id: 4,

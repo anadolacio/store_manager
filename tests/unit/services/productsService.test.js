@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const productsModels = require('../../../src/models/productsModels');
-const { getAllProductsMock, getByIdProductMock } = require('../models/mocks/products.mock');
+const { getAllProductsMock, getByIdProductMock, newProduct } = require('../models/mocks/products.mock');
 const productsService = require('../../../src/services/productsService');
 
 describe('Testa o service Products', function () {
@@ -21,10 +21,7 @@ describe('Testa o service Products', function () {
   })
 
   describe('Testa a rota para id', function () {
-    this.afterEach(() => {
-      sinon.restore()
-    })
-    it('success', async function () {
+     it('success', async function () {
       sinon.stub(productsModels, 'getOnlyIdProducts').resolves(getByIdProductMock);
 
       const idProduct = await productsService.getOnlyIdProducts(1);
@@ -33,12 +30,26 @@ describe('Testa o service Products', function () {
       expect(idProduct).to.be.deep.equal(getByIdProductMock);
     })
 
-    // it('com id inválido', async function () {
-    //   sinon.stub(productsModels, 'getOnlyIdProducts').resolves(undefined);
+    describe('testa a rota para criar um produto', function () {
+      it('success', async function () {
+        sinon.stub(productsModels, 'createProduct').resolves(newProduct);
 
-    //   const idProduct = await productsService.getOnlyIdProducts(6);
+        const productCreated = await productsModels.createProduct("Colher de Pau");
 
-    //   expect(idProduct).to.be.equal('Product not found');
-    // })
+        expect(productCreated).to.be.contain.keys(['id', 'name']);
+        expect(productCreated).to.be.an('object');
+      })
+    })
+
+    describe('testa a rota para atualizar um produto', function () {
+      it('success', async function () {
+        sinon.stub(productsModels, 'updateProduct').resolves([newProduct]);
+
+        const productUpdated = await productsModels.updateProduct({
+          name: "Colher de Pau"
+        });
+        expect(productUpdated).to.be.an("array");
+      })
+    })
   })
 });

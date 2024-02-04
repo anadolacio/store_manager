@@ -12,6 +12,7 @@ const getOnlyIdProducts = async (id) => {
 
 const createProduct = async (name) => {
   const productCreated = await productsModels.createProduct(name);
+  // console.log(productCreated);
   return productCreated;
 };
 

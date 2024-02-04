@@ -4,16 +4,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://www.localhost:3001/",
-    "url": "http://www.localhost:3001/products/1",
-    "method": "PUT",
+    "url": "http://www.localhost:3001/products",
+    "method": "GET",
     "sortNum": 0,
     "created": "2023-04-26T18:57:41.123Z",
-    "modified": "2023-05-02T21:05:30.224Z",
+    "modified": "2023-05-09T00:33:46.700Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"tábua de carne\"\n}",
+      "raw": "{\n  \"name\": \"martelo\"\n}",
       "form": []
     },
     "tests": []
